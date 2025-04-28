@@ -5,7 +5,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Form = (props) => {
     const params = useParams()
-    const {editContact, postContact} =useGlobalReducer()
+    const {store, editContact, postContact} =useGlobalReducer()
     
 
     const [inputValue, setInputValue] = useState({
@@ -35,17 +35,17 @@ export const Form = (props) => {
             })
         }
     }
-    // let contact = store.contactList.find(contact => contact.id == params.id)
-    // useEffect(() => {
-    //     if (props.pathname != '/add-contact') {
-    //         setInputValue({
-    //             name: `${contact.name}`,
-    //             phone: `${contact.phone}`,
-    //             email: `${contact.email}`,
-    //             address: `${contact.address}`
-    //         })
-    //     }
-    // }, [])
+    let contact = store.contactList.find(contact => contact.id == params.id)
+    useEffect(() => {
+        if (props.pathname != '/add-contact') {
+            setInputValue({
+                name: `${contact.name}`,
+                phone: `${contact.phone}`,
+                email: `${contact.email}`,
+                address: `${contact.address}`
+            })
+        }
+    }, [])
 
 
     const handleChange = (e) => {
